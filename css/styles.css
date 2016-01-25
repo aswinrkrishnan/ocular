@@ -1,0 +1,4 @@
+.fa-spin-custom {
+  -webkit-animation: spin 10000ms infinite linear;
+    animation: spin 10000ms infinite linear;
+}

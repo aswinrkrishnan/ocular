@@ -1,8 +1,12 @@
 function getJobList($scope, $http) {
     $http.get('http://localhost:4400/scheduler/jobs').
-        success(function(data) {
-            $scope.jobList = data;
-        });
+        success(function(data) {       
+        $scope.showJobDetails =  function(data) { 
+            $("#jobDetails").modal('show');
+            $("#jobDetails #jobName").text(data.name)
+        };
+     $scope.jobList = data;    
+    });
 }
 
 function getChronosCount($scope, $http) {
@@ -24,3 +28,4 @@ function getChronosCount($scope, $http) {
         $scope.idleCount= idleCount
         });
 }
+

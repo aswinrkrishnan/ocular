@@ -1,0 +1,67 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
+    <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        #mynetwork {
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    
+    var DOTstring = 'digraph G {1 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-AppImportExecution" ];2 [label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlAppClientImportExecution" ];3 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-SmCaseStateImportExecution" ];4 [ label="dev_datahub-synergy_etl-sap-businesspartner_SummaryExecution" ];  5 [ label="dev_datahub-synergy_etl-sap-businesspartner_ZbpIdExecution" ];  6 [ label="solr-delete" ];  7 [ label="test2_datahub-Alpha_etl-orion-claims_OmniaCaseSnapshotExecution" ];  8 [ label="test2_datahub-Alpha_etl-orion-claims_OmniaTScoreCaseExport" ];  9 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-AppImportExecution" ];  10 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlAppClientImportExecution" ];  11 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-SmCaseStateImportExecution" ];  12 [ label="test2_datahub-synergy_etl-sap-businesspartner_SummaryExecution" ];  13 [ label="test2_datahub-synergy_etl-sap-businesspartner_ZbpDs20Execution" ];  14 [ label="test2_datahub-synergy_etl-sap-businesspartner_ZbpDs23Execution" ];  15 [ label="test2_datahub-synergy_etl-sap-businesspartner_ZbpIdExecution" ];  16 [ label="test2_datahub-synergy_etl-sap-businesspartner_ZioDs01Execution" ];  17 [ label="test_datahub-Alpha_etl-commfx-foreignexchange_TeraDataExportExecution" ];  18 [ label="test_datahub-Alpha_etl-genesys-collections_CalllistExecution" ];  19 [ label="test_datahub-Alpha_etl-genesys-collections_CancelledDiallerExecution" ];  20 [ label="test_datahub-Alpha_etl-genesys-collections_CarExecution" ];  21 [ label="test_datahub-Alpha_etl-genesys-collections_CerExecution" ];  22 [ label="test_datahub-Alpha_etl-genesys-collections_CirExecution" ];  23 [ label="test_datahub-Alpha_etl-genesys-collections_DiallerExecution" ];  24 [ label="test_datahub-Alpha_etl-genesys-collections_InteractionExecution" ];  25 [ label="test_datahub-Alpha_etl-genesys-collections_QueuesExecution" ];  26 [ label="test_datahub-Alpha_etl-genesys-collections_RacExecution" ];  27 [ label="test_datahub-Alpha_etl-genesys-collections_ResourceStateExecution" ];  28 [ label="test_datahub-alpha_etl-farlo-clm_BorrTypeCodeExecution" ];  29 [ label="test_datahub-alpha_etl-farlo-clm_ClntExportExecution" ];  30 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-ChannelCatImportExecution" ];  31 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-CrisProductImportExecution" ];  32 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-CsAccountBaseImportExecution" ];  33 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-CsClientBaseImportExecution" ];  34 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlAppImportExecution" ];  35 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlAppTpbImportExecution" ];  36 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlFeatureAttrImportExecution" ];  37 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlFeatureCatImportExecution" ];  38 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlGuarOptionCatImportExecution" ];  39 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlmAppImportExecution" ];  40 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlmAppTypeCatImportExecution" ];  41 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlmSelectionListImportExecution" ];  42 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-SmCaseImportExecution" ];  43 [ label="dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-SmStateCatImportExecution" ];  44 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-ChannelCatImportExecution" ];  45 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-CrisProductImportExecution" ];  46 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-CsAccountBaseImportExecution" ];  47 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-CsClientBaseImportExecution" ];  48 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlAppImportExecution" ];  49 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlAppTpbImportExecution" ];  50 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlFeatureAttrImportExecution" ];  51 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlFeatureCatImportExecution" ];  52 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlGuarOptionCatImportExecution" ];  53 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlmAppImportExecution" ];  54 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlmAppTypeCatImportExecution" ];  55 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-HlmSelectionListImportExecution" ];  56 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-SmCaseImportExecution" ];  57 [ label="test2_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-SmStateCatImportExecution" ];  58 [ label="test_datahub-Alpha_etl-commfx-foreignexchange_CfxOtcTranExecution" ];  32 -> 30;42 -> 31;  31 -> 32;  2 -> 33;  43 -> 34;  34 -> 35;  39 -> 36;  38 -> 37;  40 -> 38;  35 -> 39;  33 -> 40;  37 -> 41;  1 -> 42;  3 ->43; 46 -> 44;  56 -> 45;  45 -> 46;  10 -> 47;  57 -> 48;  48 -> 49;  53 -> 50;  52 -> 51;  54 -> 52;  49 -> 53;  47 -> 54;  51 -> 55;  9 -> 56;  11 -> 57;}';
+var parsedData = vis.network.convertDot(DOTstring);
+
+var data = {
+  nodes: parsedData.nodes,
+  edges: parsedData.edges
+}
+
+var view = new vis.DataView(data, {
+  filter: function (item) {
+    return (item.label == 'solr-delete');
+  },
+  fields: ['id', 'text', 'date']
+});
+
+
+    // create an array with nodes
+//    var nodes = new vis.DataSet([
+//        {id: 1, label: 'Ingestion'},
+//        {id: 2, label: 'Transformation'},
+//        {id: 3, label: 'Ergression'}
+//    ]);
+//
+//    // create an array with edges
+//    var edges = new vis.DataSet([
+//        {from: 1, to: 2},
+//        {from: 2, to: 3}
+//    ]);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+    // provide the data in the vis format
+//    var data = {
+//        nodes: nodes,
+//        edges: edges
+//    };
+    var options = {}
+    var options1 = {
+  joinCondition:function(nodeOptions) {
+    return nodeOptions.label === 'dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-AppImportExecution';
+  }
+}
+
+
+    // initialize your network!
+    var network = new vis.Network(container, data, options);
+    network.clustering.cluster(options1);
+</script>
+</body>
+</html>

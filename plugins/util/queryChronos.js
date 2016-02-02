@@ -1,9 +1,17 @@
 function getJobList($scope, $http) {
     $http.get('http://localhost:4400/scheduler/jobs').
         success(function(data) {       
-        $scope.showJobDetails =  function(data) { 
+        $scope.showJobDetails =  function(job) { 
             $("#jobDetails").modal('show');
-            $("#jobDetails #jobName").text(data.name)
+            $("#jobDetails #jobName").text(job.name)
+            $("#jobDetails #description").text(job.description)
+            $("#jobDetails #command").text(job.command)
+            $("#jobDetails #owner").text(job.owner)
+            $("#jobDetails #lastSuccess").text(job.lastSuccess)
+            $("#jobDetails #successCount").text(job.successCount)
+            $("#jobDetails #errorCount").text(job.errorCount)
+            $("#jobDetails #lastError").text(job.lastError)
+            $("#jobDetails #schedule").text(job.schedule)
         };
      $scope.jobList = data;    
     });

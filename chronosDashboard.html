@@ -174,62 +174,117 @@
             <div class="modal fade" id="jobDetails"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                <div class="box box-primary">
                   <div class="box-header with-border">
-                     <h3 class="box-title">Job Details: <span id="jobName"></span></h3>
+                      <h3 class="box-title"><b><span id="jobName"></span></b></h3>
                      <div class="box-tools pull-right">
                         <button class="btn btn-box-tool close" data-dismiss="modal"><i class="fa fa-times"></i></button>
                      </div>
                   </div>
+                   <div class="box-body"></div>
                   <div class="box-body">
-                     <table class="table table-bordered">
+                      
+                      <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs pull-right">
+                  <li><a href="#graph" data-toggle="tab">Dependancy Graph</a></li>
+                  <li><a href="#volInfo" data-toggle="tab">Volume Details</a></li>
+                  <li class="active"><a href="#basicInfo" data-toggle="tab">Basic Information</a></li>
+                  <li class="pull-left header">
+                            <i class="fa fa-play"></i>
+                            <i class="fa fa-trash"></i>
+                            <i class="fa fa-pencil-square-o"></i>
+                            <i class="fa fa-files-o"></i>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane" id="graph">
+                    <b>How to use:</b>
+                    <p>Exactly like the original bootstrap tabs except you should use
+                      the custom wrapper <code>.nav-tabs-custom</code> to achieve this style.</p>
+                    A wonderful serenity has taken possession of my entire soul,
+                    like these sweet mornings of spring which I enjoy with my whole heart.
+                    I am alone, and feel the charm of existence in this spot,
+                    which was created for the bliss of souls like mine. I am so happy,
+                    my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
+                    that I neglect my talents. I should be incapable of drawing a single stroke
+                    at the present moment; and yet I feel that I never was a greater artist than now.
+                  </div><!-- /.tab-pane -->
+                  <div class="tab-pane" id="volInfo">
+                    <table class="table table-bordered table-hover">
                         <tr>
-                           <th style="width: 10px">#</th>
-                           <th>Task</th>
-                           <th>Progress</th>
-                           <th style="width: 40px">Label</th>
+                           <td>Name</td>
+                           <td colspan="3"><span id="jobName"/></td>
                         </tr>
                         <tr>
-                           <td>1.</td>
-                           <td>Update software</td>
-                           <td>
-                              <div class="progress progress-xs">
-                                 <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                              </div>
-                           </td>
-                           <td><span class="badge bg-red">55%</span></td>
+                           <td>Description</td>
+                           <td colspan="3"><span id="description"/></td>
                         </tr>
                         <tr>
-                           <td>2.</td>
-                           <td>Clean database</td>
-                           <td>
-                              <div class="progress progress-xs">
-                                 <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                              </div>
-                           </td>
-                           <td><span class="badge bg-yellow">70%</span></td>
+                           <td>Command</td>
+                           <td colspan="3"><span id="command"/></td>
                         </tr>
                         <tr>
-                           <td>3.</td>
-                           <td>Cron job running</td>
-                           <td>
-                              <div class="progress progress-xs progress-striped active">
-                                 <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                              </div>
-                           </td>
-                           <td><span class="badge bg-light-blue">30%</span></td>
+                           <td>Owner</td>
+                           <td colspan="3"><span id="owner"/></td>
                         </tr>
                         <tr>
-                           <td>4.</td>
-                           <td>Fix and squish bugs</td>
-                           <td>
-                              <div class="progress progress-xs progress-striped active">
-                                 <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                              </div>
-                           </td>
-                           <td><span class="badge bg-green">90%</span></td>
+                           <td>Last Success</td>
+                           <td><span id="lastSuccess"/></td>
+                           <td>Success Count</td>
+                           <td><span id="successCount"/></td>
                         </tr>
+                        <tr>
+                           <td>Last Error</td>
+                           <td><span id="lastError"/></td>
+                           <td>Last Error</td>
+                           <td><span id="errorCount"/></td>
+                        </tr>
+                        <tr>
+                           <td>Schedule</td>
+                           <td colspan="3"><span id="schedule"/></td>
+                        </tr>                         
                      </table>
+                  </div><!-- /.tab-pane -->
+                  <div class="tab-pane active" id="basicInfo">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                           <td>Name</td>
+                           <td colspan="3"><span id="jobName"/></td>
+                        </tr>
+                        <tr>
+                           <td>Description</td>
+                           <td colspan="3"><span id="description"/></td>
+                        </tr>
+                        <tr>
+                           <td>Command</td>
+                           <td colspan="3"><span id="command"/></td>
+                        </tr>
+                        <tr>
+                           <td>Owner</td>
+                           <td colspan="3"><span id="owner"/></td>
+                        </tr>
+                        <tr>
+                           <td>Last Success</td>
+                           <td><span id="lastSuccess"/></td>
+                           <td>Success Count</td>
+                           <td><span id="successCount"/></td>
+                        </tr>
+                        <tr>
+                           <td>Last Error</td>
+                           <td><span id="lastError"/></td>
+                           <td>Last Error</td>
+                           <td><span id="errorCount"/></td>
+                        </tr>
+                        <tr>
+                           <td>Schedule</td>
+                           <td colspan="3"><span id="schedule"/></td>
+                        </tr>                         
+                     </table>
+                  </div><!-- /.tab-pane -->
+                </div><!-- /.tab-content -->
+              </div>
                   </div>
                   <!-- /.box-body -->
+                   <div class="box-footer"></div>
                </div>
             </div>
             <!-- Content Header (Page header) -->
@@ -251,7 +306,7 @@
                         <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
                         <div class="info-box-content">
                            <span class="info-box-text">Total Jobs</span>
-                           <span class="info-box-number">{{numberOfJobs}}</span>
+                            <span class="info-box-number"><h3>{{numberOfJobs}}</h3></span>
                         </div>
                         <!-- /.info-box-content -->
                      </div>
@@ -348,7 +403,7 @@
                                     <td><span class="label label-danger">failure</span></td>
                                  </tr>
                                  <tr ng-repeat="job in jobList">
-                                    <td ng-click=showJobDetails(job)>{{job.name}}</td>
+                                    <td class="jobNameDetail" ng-click=showJobDetails(job)>{{job.name}}</td>
                                     <td>
                                        <span ng-if="job.lastSuccess > job.lastError">{{job.lastSuccess}}</span>
                                        <span ng-if="job.lastSuccess < job.lastError">{{job.lastError}}</span>

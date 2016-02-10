@@ -1,7 +1,7 @@
 <html>
 <head>
-    <script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
-    <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.13.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.13.0/vis.min.css" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
         #mynetwork {
@@ -21,47 +21,13 @@ var data = {
   nodes: parsedData.nodes,
   edges: parsedData.edges
 }
-
-var view = new vis.DataView(data, {
-  filter: function (item) {
-    return (item.label == 'solr-delete');
-  },
-  fields: ['id', 'text', 'date']
-});
-
-
-    // create an array with nodes
-//    var nodes = new vis.DataSet([
-//        {id: 1, label: 'Ingestion'},
-//        {id: 2, label: 'Transformation'},
-//        {id: 3, label: 'Ergression'}
-//    ]);
-//
-//    // create an array with edges
-//    var edges = new vis.DataSet([
-//        {from: 1, to: 2},
-//        {from: 2, to: 3}
-//    ]);
-
     // create a network
     var container = document.getElementById('mynetwork');
 
-    // provide the data in the vis format
-//    var data = {
-//        nodes: nodes,
-//        edges: edges
-//    };
     var options = {}
-    var options1 = {
-  joinCondition:function(nodeOptions) {
-    return nodeOptions.label === 'dev_datahub-synergy_etl-commsee-commsee_au-com-cba-omnia-etl-commsee-AppImportExecution';
-  }
-}
-
-
+    
     // initialize your network!
     var network = new vis.Network(container, data, options);
-    network.clustering.cluster(options1);
 </script>
 </body>
 </html>

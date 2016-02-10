@@ -1,0 +1,64 @@
+var host = "http://192.168.99.100:5000"
+    //var host="http://s025wpll6601.s4.chp.cba:8443"
+function getRepoList($scope, $http) {
+    $http.get(host + '/v2/_catalog').success(function(data) {
+        $scope.repos = data.repositories;
+        getTags($scope, $http);
+    });
+}
+
+function getTags($scope, $http) {
+    $scope.repoTags = new Array();
+    var repos = $scope.repos;
+    for (var i = 0; i < repos.length; i++) {
+        $http.get(host + '/v2/' + repos[i] + '/tags/list').success(function(data) {
+            $scope.repoTags.push(data);
+            showRepoTags();
+            $scope.getRepoTagDetails = function(repo, tag) {
+                $http.get(host + '/v2/' + repo + '/manifests/' + tag).success(function(data) {
+                    $("#jobDetails").modal('show');
+                    $("#jobDetails #jobName").text(job.name)
+                    $("#jobDetails #description").text(job.description)
+                    $("#jobDetails #command").text(job.command)
+                    $("#jobDetails #owner").text(job.owner)
+                    $("#jobDetails #lastSuccess").text(job.lastSuccess)
+                    $("#jobDetails #successCount").text(job.successCount)
+                    $("#jobDetails #errorCount").text(job.errorCount)
+                    $("#jobDetails #lastError").text(job.lastError)
+                    $("#jobDetails #schedule").text(job.schedule)
+                });
+            }
+        });
+    }
+}
+
+function repoTagdetails($scope, $http) {
+    var repoTagDetails = new Array();
+    var repoTags = $scope.repoTags;
+    for (var i = 0; i < repoTags.length; i++) {
+        for (var j = 0; j < repoTags[i].tags.length; j++) {
+            $http.get(host + '/v2/' + repoTags[i].name + '/manifests/' + repoTags[i].tags[j]).success(function(data) {
+                repoTagDetails.push({
+                    name: data.name,
+                    tag: {
+                        tagName: data.tag
+                    }
+                });
+            });
+        }
+    }
+    $scope.repoTagDetails = repoTagDetails;
+}
+
+function getTagsCount($scope, $http) {
+    $http.get(host + '/v2/_catalog').success(function(data) {
+        $scope.repoCount = data.repositories.length;
+        $scope.imageCount = 0;
+        for (var i = 0; i < data.repositories.length; i++) {
+            $http.get(host + '/v2/' + data.repositories[i] + '/tags/list').success(function(tagData) {
+                $scope.imageCount += tagData.tags.length;
+                console.log(imageCount)
+            });
+        }
+    });
+}

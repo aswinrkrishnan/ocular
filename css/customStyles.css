@@ -1,8 +1,10 @@
-.jobNameDetail{
+.pointerCursor{
     cursor: pointer;
 }
 #jobDetails{
-    width: 70%;
+    min-width: 40%;
+    max-width: 70%;
+    max-height: 90%;
     margin: auto;
     background: rgba(0,0,0,0) !important;
 }
@@ -18,7 +20,21 @@
     margin: 2px !important;
     font-size: 12px;
     cursor: pointer;
-    
+}
+.pad5{
+    padding: 5px;
+}
+.floatRight{
+  float: right;
+}
+.floatLeft{
+  float: left;
+}
+.margin10{
+  margin: 10px;
+}
+i{
+    padding: 1px;
 }
 
 

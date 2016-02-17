@@ -9,7 +9,7 @@
       <!-- Bootstrap 3.3.5 -->
       <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
       <!-- Font Awesome -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
       <!-- Ionicons -->
       <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
       <!-- Theme style -->
@@ -41,27 +41,6 @@
       <script src="plugins/util/queryRegistry.js"></script>
       <script>
          $(document).ready(function() {
-           $('th').click(function(){
-             $("#jobList tr th i").removeClass();
-             $("#jobList tr th i").addClass("fa fa-sort");
-           $("i",this).removeClass("fa-sort");
-           $("i",this).addClass("fa-sort-asc");
-            var table = $(this).parents('table').eq(0)
-            var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-            this.asc = !this.asc
-            if (!this.asc){$("i",this).toggleClass("fa-sort-asc fa-sort-desc");rows = rows.reverse()}
-            for (var i = 0; i < rows.length; i++){table.append(rows[i])}
-           })
-           
-          function comparer(index) {
-            return function(a, b) {
-             var valA = getCellValue(a, index), valB = getCellValue(b, index)
-             return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
-            }
-           }
-         
-          function getCellValue(row, index){ return $(row).children('td').eq(index).html() }
-         
           $("#job_search").keyup(function() {
            var value = this.value;
            $("#jobList").find("tr").each(function(index) {
@@ -79,13 +58,6 @@
                   $(this).html("<b>" + t.substring(0,t.indexOf('/')) + "</b>" +     t.substring(t.indexOf('/')));
             }  
                });
-         //                  $(".repoName").click(function(){
-         //                    if(!$(this).next('td').find('.tagNames').is(":visible")){
-         //                        $(".tagNames").fadeOut('slow');
-         //                        $(this).next('td').find('.tagNames').fadeIn('slow');
-         //                    }
-         //                  });
-                 
           }
       </script>
    </head>
@@ -132,22 +104,47 @@
             <div class="modal fade" id="jobDetails"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                <div class="box box-primary">
                   <div class="box-header with-border">
-                     <h3 class="box-title"><b><span id="jobName"></span></b></h3>
+                     <h3 class="box-title"><b>DETAILS FOR <span id="jobName"></span></b>:<span id="tag"/></h3>
                      <div class="box-tools pull-right">
                         <button class="btn btn-box-tool close" data-dismiss="modal"><i class="fa fa-times"></i></button>
                      </div>
                   </div>
-                  <div class="box-body"></div>
+                  <div class="box-header">
+                      <div class="callout bg-gray"><b>pull command: </b>docker pull <span id="jobName"></span>:<span id="tag"/></div>
+                   <div class="label bg-blue pad5 floatLeft pointerCursor margin10"><i class="fa fa-plus-circle"></i> Create a new tag for this Repo</div>
+                   <div class="label bg-red pad5 floatRight pointerCursor margin10"><i class="fa fa-trash"></i> Delete Tag</div>
+                  </div>
                   <div class="box-body">
                      <table class="table table-bordered table-hover">
                         <tr>
-                           <td>Name</td>
-                           <td colspan="3"><span id="jobName"/></td>
+                           <td>Architecture</td>
+                           <td><span id="architecture"/></td>
                         </tr>
                         <tr>
-                           <td>Description</td>
-                           <td colspan="3"><span id="description"/></td>
+                           <td>Created</td>
+                           <td><span id="created"/></td> 
                         </tr>
+                        <tr>
+                           <td>Image</td>
+                           <td><span id="image"/></td>
+                        </tr>
+                        <tr>
+                           <td>Container</td>
+                           <td><span id="container"/></td>
+                        </tr>
+                        <tr>
+                           <td>Docker Version</td>
+                           <td><span id="dockerVersion"/></td>
+                        </tr>
+                        <tr>
+                           <td>Operating System</td>
+                           <td><span id="os"/></td> 
+                        </tr>
+                        <tr>
+                           <td>Size</td>
+                           <td colspan="3"><span id="size"/></td>
+                        </tr>
+                         
                      </table>
                   </div>
                   <!-- /.box-body -->
@@ -213,14 +210,22 @@
                            </div>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding" ng-controller="getRepoList">
+                        <div class="box-body table-responsive no-padding" ng-controller="getRepoList"  id="jobList">
                            <table  class="table table-hover">
-                              <tr ng-repeat="repo in repoTags">
+                               <tr>
+                                   <th>Repository Name</th>
+                                   <th>Tags</th>
+                                   <th></th>
+                               </tr>
+                               <tr ng-repeat="repo in repoTags">
                                  <td class="repoName">{{repo.name}}</td>
                                  <td>
                                     <div ng-repeat="tags in repo.tags" class="tagNames">
                                        <p class="label bg-blue" ng-click="getRepoTagDetails(repo.name, tags)"><i class="fa fa-tag"></i> {{tags}}</p>
                                     </div>
+                                 </td>
+                                 <td>
+                                  <div class="badge bg-red floatRight pointerCursor"><i class="fa fa-trash"></i> Delete Repository</div>
                                  </td>
                               </tr>
                            </table>

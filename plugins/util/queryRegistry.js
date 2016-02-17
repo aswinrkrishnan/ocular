@@ -1,5 +1,5 @@
 var host = "http://192.168.99.100:5000"
-    //var host="http://s025wpll6601.s4.chp.cba:8443"
+//var host="http://s025wpll6601.s4.chp.cba:8443"
 function getRepoList($scope, $http) {
     $http.get(host + '/v2/_catalog').success(function(data) {
         $scope.repos = data.repositories;
@@ -16,16 +16,18 @@ function getTags($scope, $http) {
             showRepoTags();
             $scope.getRepoTagDetails = function(repo, tag) {
                 $http.get(host + '/v2/' + repo + '/manifests/' + tag).success(function(data) {
+                    console.log(host + '/v2/' + repo + '/manifests/' + tag)
                     $("#jobDetails").modal('show');
-                    $("#jobDetails #jobName").text(job.name)
-                    $("#jobDetails #description").text(job.description)
-                    $("#jobDetails #command").text(job.command)
-                    $("#jobDetails #owner").text(job.owner)
-                    $("#jobDetails #lastSuccess").text(job.lastSuccess)
-                    $("#jobDetails #successCount").text(job.successCount)
-                    $("#jobDetails #errorCount").text(job.errorCount)
-                    $("#jobDetails #lastError").text(job.lastError)
-                    $("#jobDetails #schedule").text(job.schedule)
+                    $("#jobDetails #jobName").text(data.name)
+                    $("#jobDetails #tag").text(data.tag)
+                    $("#jobDetails #architecture").text(data.architecture)
+                    var history = jQuery.parseJSON(data.history[0].v1Compatibility)
+                    $("#jobDetails #created").text(new Date(history.created))
+                    $("#jobDetails #image").text(history.Image)
+                    $("#jobDetails #container").text(history.container)
+                    $("#jobDetails #dockerVersion").text(history.docker_version)
+                    $("#jobDetails #os").text(history.os)
+                    $("#jobDetails #size").text(history.Size)
                 });
             }
         });
@@ -57,7 +59,6 @@ function getTagsCount($scope, $http) {
         for (var i = 0; i < data.repositories.length; i++) {
             $http.get(host + '/v2/' + data.repositories[i] + '/tags/list').success(function(tagData) {
                 $scope.imageCount += tagData.tags.length;
-                console.log(imageCount)
             });
         }
     });

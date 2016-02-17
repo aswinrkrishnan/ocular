@@ -1,5 +1,11 @@
 var host = 'http://localhost:4400'
 
+angular.module('chronApp',[])
+    .config(function ($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];        
+    });
+
 function getJobList($scope, $http) {
     $http.get(host + '/scheduler/jobs').
     success(function(data) {
@@ -9,13 +15,23 @@ function getJobList($scope, $http) {
             $("#jobDetails #description").text(job.description)
             $("#jobDetails #command").text(job.command)
             $("#jobDetails #owner").text(job.owner)
-            $("#jobDetails #lastSuccess").text(job.lastSuccess)
+            $("#jobDetails #lastSuccess").text(timeDifference(job.lastSuccess))
             $("#jobDetails #successCount").text(job.successCount)
             $("#jobDetails #errorCount").text(job.errorCount)
-            $("#jobDetails #lastError").text(job.lastError)
+            $("#jobDetails #lastError").text(timeDifference(job.lastError))
             $("#jobDetails #schedule").text(job.schedule)
+            $('#volInfoTable').find("tr:gt(0)").remove();
+            for(var i = 0; i < job.container.volumes.length; i++ ){
+                var ico="";
+                if(job.container.volumes[i].mode=="RO")
+                    ico="<i class='fa fa-lock'></i>"
+                else
+                    ico="<i class='fa fa-unlock'></i>"
+            $('#volInfoTable > tbody:last-child').append('<tr><td>'+job.container.volumes[i].hostPath+'</td><td>'+job.container.volumes[i].containerPath+'</td><td><div class="badge bg-blue">'+ico+job.container.volumes[i].mode+'</div></td></tr>');
+            }
         };
         $scope.jobList = data;
+        
     });
 }
 
@@ -35,8 +51,9 @@ function getChronosCount($scope, $http) {
         }
         $scope.successCount = successCount;
         $scope.numberOfJobs = data.length;
-        $scope.failureCount = failureCount
-        $scope.idleCount = idleCount
+        $scope.failureCount = failureCount;
+        $scope.idleCount = idleCount;
+        convertDate();
     });
 }
 
@@ -54,3 +71,21 @@ function dependancyGraph($scope, $http) {
         var network = new vis.Network(container, data, options);
     });
 }
+function timeDifference(previous) {
+    if(previous == ""){return "No Previous runs";}
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var elapsed = new Date - new Date(previous);
+    if (elapsed < msPerMinute) return Math.round(elapsed/1000) + ' seconds ago';
+    else if (elapsed < msPerHour) return Math.round(elapsed/msPerMinute) + ' minutes ago';
+    else if (elapsed < msPerDay ) return Math.round(elapsed/msPerHour ) + ' hours ago';
+    else return new Date(previous)+"";
+}
+
+angular.module('chronApp').filter('dateTransform', function($filter){
+    return function(input){
+        if(input == null || input == "") return "";
+        return timeDifference(input);
+    };
+});

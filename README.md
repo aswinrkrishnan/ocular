@@ -5,11 +5,16 @@ Ocular Dashboard
 
 Displays details of the jobs that run using chronos.
 
-Available options
+Available options:
+
 1. Displays the jobs there last run time and status
+
 2. Filtering jobs based on their last run status
+
 3. Job details like run command, last sucess, last failure, total sucess count failure counts etc, also volume details of the container in which the job is running.
+
 4. Dependancy graph of a job, displaying the dependant jobs of a particular job._[WIP]_
+
 5. Ability to start, delete or modify a job.
 
 

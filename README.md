@@ -3,23 +3,22 @@ Ocular Dashboard
 
 **Chronos Dashboard**
 
-Displays details of the jobs that run using chronos.
+Displays details of the jobs that run on chronos.
 
 Available options:
 
-1. Displays the jobs there last run time and status
-
-2. Filtering jobs based on their last run status
-
-3. Job details like run command, last sucess, last failure, total sucess count failure counts etc, also volume details of the container in which the job is running.
-
-4. Dependancy graph of a job, displaying the dependant jobs of a particular job._[WIP]_
-
-5. Ability to start, delete or modify a job.
+* Displays the jobs there last run time and status
+* Filtering jobs based on their last run status
+* Job details like run command, last sucess, last failure, total sucess count failure counts etc, also volume details of the container in which the job is running.
+* Dependancy graph of a job, displaying the dependant jobs of a particular job._[WIP]_
+* Ability to start, delete or modify a job(Not yet enabled).
 
 
 
 **Docker Registry**
 
-List all the docker repositories after connecting to a docker registry and shows all the tags associated with a repository.
-Details associated with a tag is also displayed along with the details of the latest image.
+List all the docker repositories in a docker registry and shows the following features.
+
+* Lists all the tags related to a particular docker repository.
+* Displays the details of each tag on click.
+* Provides ability to delete a tag or docker repo(Not yet enabled).
